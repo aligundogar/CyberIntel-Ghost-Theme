@@ -1,7 +1,7 @@
 {
     "name": "cyberintel-ghost-theme",
     "description": "Dark-themed Ghost blog for cyber intelligence, cybersecurity, and geopolitics",
-    "version": "1.3.0",
+    "version": "1.6.0",
     "engines": {
         "ghost": ">=5.0.0"
     },
@@ -40,10 +40,10 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/TryGhost/Starter.git"
+        "url": "https://github.com/aligundogar/CyberIntel-Ghost-Theme.git"
     },
-    "bugs": "https://github.com/TryGhost/Starter/issues",
-    "contributors": "https://github.com/TryGhost/Starter/graphs/contributors",
+    "bugs": "https://github.com/aligundogar/CyberIntel-Ghost-Theme/issues",
+    "contributors": ["https://github.com/aligundogar/CyberIntel-Ghost-Theme/graphs/contributors"],
     "devDependencies": {
         "@babel/core": "^7.21.0",
         "@babel/preset-env": "^7.20.2",
@@ -63,6 +63,13 @@
         "defaults"
     ],
     "config": {
+        "custom": {
+            "content_api_key": {
+                "type": "text",
+                "default": "",
+                "description": "Content API Key for 3D Globe & Scripts (Get it from Settings > Integrations)"
+            }
+        },
         "card_assets": true,
         "posts_per_page": 12,
         "image_sizes": {

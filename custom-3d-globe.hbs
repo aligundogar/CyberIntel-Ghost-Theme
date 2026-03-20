@@ -40,6 +40,7 @@ visualizing real-time or mocked threat feeds (like the Iran OSINT JSON data).
 </div>
 
 {{#contentFor "scripts"}}
+<script src="{{asset "js/geodata.js"}}"></script>
 <script src="//unpkg.com/three"></script>
 <script src="//unpkg.com/globe.gl"></script>
 <style>
@@ -191,65 +192,119 @@ document.addEventListener("DOMContentLoaded", () => {
       .atmosphereColor('#9333ea')
       .atmosphereAltitude(0.15);
 
-    // Make the globe auto-rotate and zoom out slightly
     world.controls().autoRotate = true;
     world.controls().autoRotateSpeed = 1.0;
+    world.pointOfView({ lat: 32, lng: 53, altitude: 2 }); // Initial view at Middle East
+
+    // Get coords dictionary from geodata.js payload
+    const countryCoords = window.GHOST_GEO_DICT || {};
+
+    // 2. Fetch Data from Ghost Content API
+    const API_KEY = '{{@custom.content_api_key}}';
+    const GHOST_URL = '{{@site.url}}';
     
-    // Set initial position pointing roughly at Middle East
-    world.pointOfView({ lat: 32, lng: 53, altitude: 2 });
-
-    // 2. Generate Data for Iran/Geopolitics
-    // Center cluster around Iran (lat 32.4, lng 53.6)
-    const N = 45;
-    const arcsData = [...Array(N).keys()].map(() => {
-        // Source points mostly in Iran
-        const srcLat = 32.4279 + (Math.random() - 0.5) * 15;
-        const srcLng = 53.6880 + (Math.random() - 0.5) * 15;
-        
-        // Target points around the world
-        const tgtLat = (Math.random() - 0.5) * 160;
-        const tgtLng = (Math.random() - 0.5) * 360;
-
-        return {
-            startLat: srcLat,
-            startLng: srcLng,
-            endLat: tgtLat,
-            endLng: tgtLng,
-            color: Math.random() > 0.5 ? ['#ff3e3e', '#ff3e3e'] : ['#00ff41', '#00ff41']
-        };
-    });
-
-    world.arcsData(arcsData)
-         .arcColor('color')
-         .arcDashLength(() => Math.random() * 0.5 + 0.1)
-         .arcDashGap(() => Math.random() * 0.5 + 0.5)
-         .arcDashAnimateTime(() => Math.random() * 4000 + 1000)
-         .arcStroke(0.8);
-
-    // 3. Stats update
-    document.getElementById('nodeCount').innerText = N * 2;
-    document.getElementById('threatCount').innerText = N;
-
-    // 4. Mock Feed from 'Tehran Times' JSON format
+    // Fallback Mock Feeds
     const mockFeeds = [
-        "U.S.-Israeli strikes keep targeting emergency teams",
-        "War threatens fragile ecosystems of Persian Gulf",
-        "Bombed Iranian girls school had yearslong online presence",
-        "Trump administration in disarray: How Washington miscalculated",
-        "US aircraft losses mount as Washington struggles to contain narrative",
-        "America's economy, industrial base weren't built for this war",
-        "Mexican academics express sympathy, solidarity with Iranian nation"
+        "Awaiting API connection...",
+        "To enable live data, please enter your Content API Key in the Theme Settings.",
+        "Currently running in DEMO mode."
     ];
+    let feedContainer = document.getElementById('feedContent');
 
-    const feedContent = document.getElementById('feedContent');
-    mockFeeds.forEach(t => {
-        const div = document.createElement('div');
-        div.className = 'feed-item';
-        // Randomize the time slightly for effect
-        const randomTime = new Date(Date.now() - Math.random() * 10000000).toISOString().split('T')[1].slice(0,8);
-        div.innerHTML = `<span class="date">[${randomTime}] SYS.LOG</span><span class="title">${t}</span>`;
-        feedContent.appendChild(div);
-    });
+    if (!API_KEY || API_KEY === '') {
+        mockFeeds.forEach(t => {
+            const div = document.createElement('div');
+            div.className = 'feed-item';
+            div.innerHTML = `<span class="date">[SYS.ERR]</span><span class="title" style="color:var(--color-red)">${t}</span>`;
+            feedContainer.appendChild(div);
+        });
+        document.getElementById('nodeCount').innerText = "0";
+        document.getElementById('threatCount').innerText = "0";
+    } else {
+        // Fetch posts published in the last 7 days
+        const limitDays = 7;
+        const cutoffDate = new Date();
+        cutoffDate.setDate(cutoffDate.getDate() - limitDays);
+        const isoCutoff = cutoffDate.toISOString().split('.')[0] + 'Z'; 
+        // Ghost Content API filter syntax: published_at:>'2023-01-01T00:00:00Z'
+        
+        const fetchUrl = `${GHOST_URL}/ghost/api/content/posts/?key=${API_KEY}&filter=published_at:>'${isoCutoff}'&include=tags&limit=100`;
+
+        fetch(fetchUrl)
+            .then(res => res.json())
+            .then(data => {
+                if(data.errors) {
+                    console.error("Ghost API Error: ", data.errors);
+                    return;
+                }
+                const posts = data.posts || [];
+                
+                let pointsData = [];
+                let arcsData = [];
+                
+                // Keep the Middle East as the center of operations
+                const srcLat = 32.4279;
+                const srcLng = 53.6880;
+
+                posts.forEach(post => {
+                    // Populate feed
+                    const div = document.createElement('div');
+                    div.className = 'feed-item';
+                    const pubDate = new Date(post.published_at).toISOString().split('T')[1].slice(0,8);
+                    div.innerHTML = `<span class="date">[${pubDate}] SYS.LOG</span><span class="title"><a href="${post.url}" target="_blank" style="color:#fff; text-decoration:none;">${post.title}</a></span>`;
+                    feedContainer.appendChild(div);
+
+                    // Check tags for country coords
+                    if(post.tags && post.tags.length > 0) {
+                        post.tags.forEach(tag => {
+                            let slug = tag.slug.toLowerCase();
+                            if(countryCoords[slug]) {
+                                let coords = countryCoords[slug];
+                                
+                                // Add Dot
+                                pointsData.push({
+                                    lat: coords.lat + (Math.random() - 0.5) * 2, // Slight scatter
+                                    lng: coords.lng + (Math.random() - 0.5) * 2,
+                                    size: 1.5,
+                                    color: ['ir', 'iran', 'palestine', 'syria'].includes(slug) ? '#00ff41' : '#ff3e3e',
+                                    name: tag.name
+                                });
+
+                                // Add Arc from center to point
+                                arcsData.push({
+                                    startLat: srcLat,
+                                    startLng: srcLng,
+                                    endLat: coords.lat,
+                                    endLng: coords.lng,
+                                    color: ['ir', 'iran', 'palestine', 'syria'].includes(slug) ? ['#00ff41', '#00ff41'] : ['#ff3e3e', '#ff3e3e']
+                                });
+                            }
+                        });
+                    }
+                });
+
+                // Render Points & Arcs
+                world.pointsData(pointsData)
+                     .pointColor('color')
+                     .pointAltitude(0.01)
+                     .pointRadius('size')
+                     .pointsMerge(false);
+
+                world.arcsData(arcsData)
+                     .arcColor('color')
+                     .arcDashLength(() => 0.4)
+                     .arcDashGap(() => 0.2)
+                     .arcDashAnimateTime(() => Math.random() * 4000 + 1000)
+                     .arcStroke(0.6);
+
+                // Update Stats
+                document.getElementById('nodeCount').innerText = pointsData.length;
+                document.getElementById('threatCount').innerText = arcsData.length;
+            })
+            .catch(err => {
+                console.error("Failed to fetch feed: ", err);
+            });
+    }
 
     // Make it responsive
     const updateSize = () => {
