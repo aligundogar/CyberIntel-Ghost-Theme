@@ -12,7 +12,7 @@
     "scripts": {
         "dev": "rollup -c --environment BUILD:development -w",
         "build": "rollup -c --environment BUILD:production",
-        "zip": "npm run build && bestzip $npm_package_name.zip assets/* partials/* members/* locales/* *.hbs package.json",
+        "zip": "npm run build && bestzip $npm_package_name-v$npm_package_version.zip assets/* partials/* members/* locales/* *.hbs package.json",
         "test": "npx gscan .",
         "pretest": "npm run build"
     },
