@@ -1,7 +1,7 @@
 {
     "name": "cyberintel-ghost-theme",
     "description": "Dark-themed Ghost blog for cyber intelligence, cybersecurity, and geopolitics",
-    "version": "1.6.0",
+    "version": "1.6.1",
     "engines": {
         "ghost": ">=5.0.0"
     },

@@ -1,17 +1,18 @@
 const fs = require('fs');
 const GhostAdminAPI = require('@tryghost/admin-api');
+require('dotenv').config();
 
 // ==========================================
 // KULLANIM:
-// 1. Terminalde `npm install @tryghost/admin-api` komutunu çalıştırın.
+// 1. Terminalde `npm install @tryghost/admin-api dotenv` komutunu çalıştırın.
 // 2. Ghost Admin paneline gidin: Settings > Integrations > Add Custom Integration.
-// 3. Oradaki "Admin API Key" ve "API URL" değerlerini kopyalayıp aşağıya yapıştırın.
+// 3. .env dosyasına kimlik bilgilerinizi tanımlayın.
 // 4. `node import_osint_feed.js` yazarak scripti çalıştırın.
 // ==========================================
 
 const api = new GhostAdminAPI({
-    url: 'http://localhost:2368', // BURAYA GHOST SİTE LİNKİNİZİ YAZIN (örn. https://site.com)
-    key: 'YOUT_ADMIN_API_KEY',    // BURAYA ADMIN API KEY'İ YAPIŞTIRIN
+    url: process.env.GHOST_API_URL,      // .env'den çekilen URL
+    key: process.env.GHOST_ADMIN_API_KEY,  // .env'den çekilen ADMIN API KEY
     version: 'v5.0'
 });
 
