@@ -1,0 +1,28 @@
+{{!< default}}
+
+{{!-- 
+This is a custom template for a "Threat Map / Tracker" page.
+It uses a full-width layout, removing typical article margins, 
+perfect for embedding full-screen iframes (like Kaspersky Cyber Map, Norse Map, or Grafana Dashboards).
+--}}
+
+<div class="gh-page">
+    <article class="gh-article {{post_class}}">
+        
+        <header class="gh-article-header gh-canvas cyber-live-head" style="margin-top: 4vmin;">
+            <div class="cyber-live-indicator">
+                <span class="cyber-status-dot"></span> GLOBAL THREAT MONITOR
+            </div>
+            <h1 class="gh-article-title">{{title}}</h1>
+            {{#if custom_excerpt}}
+                <p class="gh-article-excerpt">{{custom_excerpt}}</p>
+            {{/if}}
+        </header>
+
+        {{!-- Full width container for maps and iframes --}}
+        <div class="gh-content gh-canvas-fullwidth cyber-map-wrapper">
+            {{content}}
+        </div>
+
+    </article>
+</div>

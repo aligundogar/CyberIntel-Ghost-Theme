@@ -1,0 +1,43 @@
+{{!< default}}
+
+{{!-- 
+This is a custom template for a "Classified Briefing / Deep Dive Report" page.
+It features a dossier-like aesthetic, strict monospace meta headers, and red warnings.
+Perfect for long-form, highly detailed cyber intelligence reports.
+--}}
+
+<div class="gh-page">
+    <article class="gh-article {{post_class}} cyber-briefing-article">
+        
+        <header class="gh-article-header gh-canvas">
+            <div class="cyber-classification">
+                <span class="cyber-classification-text">TOP SECRET // REL TO EYES ONLY</span>
+            </div>
+            
+            <h1 class="gh-article-title" style="margin-top: 2vmin;">{{title}}</h1>
+            
+            <div class="cyber-briefing-meta">
+                <span class="cyber-briefing-meta-item"><strong>DATE:</strong> {{date format="YYYY-MM-DD HH:mm"}} ZULU</span>
+                <span class="cyber-briefing-meta-item"><strong>AUTHOR:</strong> {{#foreach authors}}{{name}} {{/foreach}}</span>
+                <span class="cyber-briefing-meta-item"><strong>ID:</strong> {{id}}</span>
+            </div>
+
+            {{#if custom_excerpt}}
+                <p class="gh-article-excerpt" style="font-family: var(--font-mono); font-size: 1.4rem;">
+                    [SUMMARY] {{custom_excerpt}}
+                </p>
+            {{/if}}
+        </header>
+
+        <div class="gh-content gh-canvas cyber-briefing-content">
+            {{content}}
+        </div>
+
+        <footer class="gh-article-footer gh-canvas">
+            <div class="cyber-classification" style="margin-top: 8vmin;">
+                <span class="cyber-classification-text">END OF REPORT // {{date format="YYYY-MM-DD"}}</span>
+            </div>
+        </footer>
+
+    </article>
+</div>
