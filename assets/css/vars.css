@@ -1,20 +1,53 @@
-/* Variables
+/* Variables — CyberIntel Dark Theme
 /* ---------------------------------------------------------- */
 
 :root {
 
-    /* Colours */
-    --color-primary: var(--ghost-accent-color, #3eb0ef);
-    --color-base: #131313;
-    --color-border: #ddd;
-    --color-bg: #f5f5f5;
-    --color-success: #80b912;
-    --color-error: #f05230;
+    /* Core Palette: Black / Green / Burgundy / Red / Purple */
+    --color-primary: var(--ghost-accent-color, #00ff41);
+    --color-base: #e2e8f0;
+    --color-border: rgba(255,255,255,0.08);
+    --color-bg: #0a0a0f;
+    --color-success: #00ff41;
+    --color-error: #ff3e3e;
+
+    /* Surfaces */
+    --color-surface: #10111a;
+    --color-surface-elevated: #161825;
+    --color-surface-hover: #1c1f30;
+
+    /* Accent Colors */
+    --color-green: #00ff41;
+    --color-green-dim: #00cc33;
+    --color-burgundy: #8b1a4a;
+    --color-burgundy-bright: #a8325e;
+    --color-red: #ff3e3e;
+    --color-red-dim: #cc2929;
+    --color-purple: #9333ea;
+    --color-purple-dim: #7c22c7;
+    --color-purple-bright: #a855f7;
+
+    /* Text */
+    --color-text: #e2e8f0;
+    --color-text-secondary: #8892a4;
+    --color-text-muted: #4a5568;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, #00ff41 0%, #9333ea 100%);
+    --gradient-hero: linear-gradient(180deg, rgba(10,10,15,0) 0%, rgba(10,10,15,0.9) 100%);
+    --gradient-card: linear-gradient(135deg, rgba(147,51,234,0.08) 0%, rgba(0,255,65,0.05) 100%);
+    --gradient-burgundy: linear-gradient(135deg, #8b1a4a 0%, #9333ea 100%);
+
+    /* Glow FX */
+    --glow-green: 0 0 20px rgba(0,255,65,0.3), 0 0 40px rgba(0,255,65,0.1);
+    --glow-purple: 0 0 20px rgba(147,51,234,0.3), 0 0 40px rgba(147,51,234,0.1);
+    --glow-red: 0 0 20px rgba(255,62,62,0.3);
+    --glow-burgundy: 0 0 20px rgba(139,26,74,0.4);
 
     /* Fonts */
-    --font-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    --font-sans-serif: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", sans-serif;
     --font-serif: Georgia, Times, serif;
-    --font-mono: Menlo, Courier, monospace;
+    --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, Courier, monospace;
     --font-light: 100;
     --font-normal: 400;
     --font-bold: 700;
@@ -30,6 +63,6 @@
     /* Sizes */
     --height: 4rem;
     --margin: 2rem;
-    --radius: 0.5rem;
-
+    --radius: 0.6rem;
+    --radius-lg: 1.2rem;
 }

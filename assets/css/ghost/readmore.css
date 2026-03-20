@@ -1,9 +1,10 @@
-/* Read More
+/* Read More — CyberIntel Dark Theme
 /* ---------------------------------------------------------- */
 
 .gh-readmore {
     padding: 8vmin 4vmin;
     font-size: 2.6rem;
+    border-top: 1px solid var(--color-border);
 }
 
 .gh-readmore-inner {
@@ -19,8 +20,13 @@
 
 .gh-readmore a {
     display: flex;
-    color: currentColor;
+    color: var(--color-text);
     text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.gh-readmore a:hover {
+    color: var(--color-purple-bright);
 }
 
 .gh-readmore h4 {
@@ -33,6 +39,15 @@
     vertical-align: middle;
     height: 1em;
     margin: 0.15em 0 0;
+    transition: transform 0.2s ease;
+}
+
+.gh-readmore a:hover svg {
+    transform: translateX(-3px);
+}
+
+.gh-readmore-prev a:hover svg {
+    transform: translateX(3px);
 }
 
 .gh-readmore svg + h4,

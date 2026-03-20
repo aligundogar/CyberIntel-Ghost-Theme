@@ -1,4 +1,32 @@
 {{!< default}}
+
+{{!-- Hero Section --}}
+<section class="cyber-hero">
+    <div class="cyber-hero-inner gh-container">
+        <div class="cyber-hero-content">
+            <div class="cyber-hero-badge">
+                <span class="cyber-status-dot"></span>
+                <span>{{@site.title}}</span>
+            </div>
+            <h1 class="cyber-hero-title">{{@site.title}}</h1>
+            {{#if @site.description}}
+                <p class="cyber-hero-desc">{{@site.description}}</p>
+            {{/if}}
+            <div class="cyber-hero-terminal" aria-hidden="true">
+                <span class="cyber-terminal-prompt">$&gt;</span>
+                <span class="cyber-terminal-text" id="cyber-typewriter"></span>
+                <span class="cyber-terminal-cursor">_</span>
+            </div>
+        </div>
+        <div class="cyber-hero-grid" aria-hidden="true">
+            <div class="cyber-grid-line"></div>
+            <div class="cyber-grid-line"></div>
+            <div class="cyber-grid-line"></div>
+        </div>
+    </div>
+</section>
+
+{{!-- Post Feed --}}
 <div class="gh-page">
     <div class="gh-container">
 

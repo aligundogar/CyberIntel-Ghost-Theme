@@ -4,17 +4,25 @@
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {{!-- Google Fonts: Inter + JetBrains Mono --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="{{asset "built/index.css"}}" />
     <script src="{{asset "built/index.js"}}" defer></script>
 
     <title>{{meta_title}}</title>
 
     {{ghost_head}}
-    {{!-- Outputs important meta data and settings, should always be in <head> --}}
 
 </head>
-<body class="{{body_class}}">
+<body class="{{body_class}}" data-theme="dark">
 <div class="gh-viewport">
+
+    {{!-- Scanline overlay for CRT effect --}}
+    <div class="cyber-scanline" aria-hidden="true"></div>
 
 <header id="gh-head" class="gh-head">
     <nav class="gh-head-inner gh-container">
@@ -24,7 +32,7 @@
                 {{#if @site.logo}}
                     <img src="{{@site.logo}}" alt="{{@site.title}}" />
                 {{else}}
-                    {{@site.title}}
+                    <span class="cyber-logo-text">{{@site.title}}</span>
                 {{/if}}
             </a>
             <a class="gh-burger" role="button" aria-label="menu">
@@ -41,9 +49,9 @@
                 {{search}}
                 {{#if @site.members_enabled}}
                     {{^if @member}}
-                    <a class="gh-button" href="{{@site.signup_url}}">Subscribe</a>
+                    <a class="gh-button" href="{{@site.signup_url}}">{{t "Subscribe"}}</a>
                     {{else}}
-                    <a class="gh-button" href="#/portal/account">Account</a>
+                    <a class="gh-button" href="#/portal/account">{{t "Account"}}</a>
                     {{/if}}
                 {{/if}}
             </div>
@@ -54,26 +62,44 @@
 <main class="gh-main">
 
     {{{body}}}
-    {{!-- All content gets inserted here, index.hbs, post.hbs, etc --}}
 
 </main>
 
 <footer class="gh-foot">
-    <div class="gh-container">
-        <div class="gh-foot-menu">
-            {{navigation type="secondary"}}
+    <div class="gh-foot-inner gh-container">
+        <div class="gh-foot-top">
+            <div class="gh-foot-brand">
+                <a href="{{@site.url}}" class="gh-foot-logo-link">
+                    {{#if @site.logo}}
+                        <img src="{{@site.logo}}" alt="{{@site.title}}" class="gh-foot-logo" />
+                    {{else}}
+                        <span class="cyber-logo-text">{{@site.title}}</span>
+                    {{/if}}
+                </a>
+                {{#if @site.description}}
+                    <p class="gh-foot-desc">{{@site.description}}</p>
+                {{/if}}
+            </div>
+            <div class="gh-foot-nav">
+                <h4 class="gh-foot-nav-title">{{t "Navigation"}}</h4>
+                {{navigation type="secondary"}}
+            </div>
         </div>
-        <div class="gh-foot-meta">
-            Published with <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+        <div class="gh-foot-bottom">
+            <div class="gh-foot-meta">
+                &copy; {{date format="YYYY"}} {{@site.title}} &bull; {{t "Powered by"}} <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+            </div>
+            <div class="gh-foot-status">
+                <span class="cyber-status-dot"></span>
+                <span class="cyber-status-text">{{t "SYSTEM ACTIVE"}}</span>
+            </div>
         </div>
     </div>
 </footer>
 
 </div>
 
-{{!-- <foot> --}}
 {{ghost_foot}}
-{{!-- Outputs important scripts - should always be included before closing body tag --}}
 
 </body>
 </html>

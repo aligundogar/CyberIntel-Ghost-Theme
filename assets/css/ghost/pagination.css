@@ -3,4 +3,16 @@
     display: flex;
     justify-content: space-between;
     margin-block: 4vmin;
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
+}
+
+.gh-pagination .pagination a {
+    color: var(--color-purple-bright);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.gh-pagination .pagination a:hover {
+    color: var(--color-green);
 }

@@ -1,7 +1,6 @@
 {
-    "name": "ghost-starter-theme",
-    "description": "A starter theme for Ghost theme development",
-    "demo": "https://starter.ghost.io",
+    "name": "cyberintel-ghost-theme",
+    "description": "Dark-themed Ghost blog for cyber intelligence, cybersecurity, and geopolitics",
     "version": "1.0.0",
     "engines": {
         "ghost": ">=5.0.0"
@@ -13,7 +12,7 @@
     "scripts": {
         "dev": "rollup -c --environment BUILD:development -w",
         "build": "rollup -c --environment BUILD:production",
-        "zip": "npm run build && bestzip $npm_package_name.zip assets/* partials/* members/* *.hbs package.json",
+        "zip": "npm run build && bestzip $npm_package_name.zip assets/* partials/* members/* locales/* *.hbs package.json",
         "test": "npx gscan .",
         "pretest": "npm run build"
     },
@@ -25,14 +24,19 @@
     "gpm": {
         "type": "theme",
         "categories": [
-            "Minimal",
-            "Magazine"
+            "Dark",
+            "Magazine",
+            "Newsletter"
         ]
     },
     "keywords": [
         "ghost",
         "theme",
-        "ghost-theme"
+        "ghost-theme",
+        "cybersecurity",
+        "cyber-intelligence",
+        "geopolitics",
+        "dark-theme"
     ],
     "repository": {
         "type": "git",
@@ -60,7 +64,7 @@
     ],
     "config": {
         "card_assets": true,
-        "posts_per_page": 15,
+        "posts_per_page": 12,
         "image_sizes": {
             "xxs": {
                 "width": 30

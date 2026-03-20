@@ -1,6 +1,6 @@
 
 
-/* Content grid
+/* Content grid — CyberIntel Dark Theme
 /* ---------------------------------------------------------- */
 
 .gh-canvas,
@@ -62,10 +62,11 @@
 .gh-canvas > ul,
 .gh-canvas > dl,
 .gh-canvas > p {
-    font-family: var(--font-serif);
+    font-family: var(--font-sans-serif);
     font-weight: 400;
-    font-size: 2rem;
-    line-height: 1.6em;
+    font-size: 1.85rem;
+    line-height: 1.7em;
+    color: var(--color-text-secondary);
 }
 
 .gh-content > ul,
@@ -76,25 +77,32 @@
 
 .gh-content hr {
     margin-top: 6vmin;
+    border-color: var(--color-border);
 }
 
 .gh-content hr + * {
     margin-top: 6vmin !important;
 }
 
+/* Blockquotes */
 .gh-content blockquote {
     position: relative;
     font-style: italic;
+    padding: 2rem 2.5rem;
+    background: rgba(139,26,74,0.08);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    color: var(--color-text);
 }
 
 .gh-content blockquote::before {
     content: "";
     position: absolute;
-    left: -1.5em;
+    left: 0;
     top: 0;
     bottom: 0;
-    width: 0.3rem;
-    background: var(--color-primary);
+    width: 3px;
+    background: var(--gradient-burgundy);
+    border-radius: 3px;
 }
 
 @media (max-width: 650px) {
@@ -103,11 +111,11 @@
     .gh-canvas ul,
     .gh-canvas dl,
     .gh-canvas p {
-        font-size: 1.8rem;
+        font-size: 1.7rem;
     }
 
     .gh-content blockquote::before {
-        left: -4vmin;
+        left: 0;
     }
 }
 
@@ -126,34 +134,49 @@
 figcaption {
     padding: 1.5rem 1.5rem 0;
     text-align: center;
-    color: rgba(0,0,0,0.5);
-    font-weight: 600;
+    color: var(--color-text-muted);
+    font-weight: 500;
     font-size: 1.3rem;
     line-height: 1.4em;
 }
 
 figcaption strong {
-    color: rgba(0,0,0,0.8);
+    color: var(--color-text-secondary);
 }
 
+/* Inline Code */
 .gh-canvas :not(pre) code {
     vertical-align: middle;
-    padding: 0.15em 0.4em 0.15em;
-    border: #e1eaef 1px solid;
+    padding: 0.15em 0.5em 0.15em;
+    border: 1px solid rgba(147,51,234,0.2);
+    font-family: var(--font-mono);
     font-weight: 400 !important;
-    font-size: 0.9em;
+    font-size: 0.85em;
     line-height: 1em;
-    color: #dc0050;
-    background: #f0f6f9;
-    border-radius: 0.25em;
+    color: var(--color-green);
+    background: rgba(147,51,234,0.08);
+    border-radius: 4px;
 }
 
+/* Code Blocks */
 .gh-canvas > pre {
-    overflow: scroll;
-    padding: 16px 20px;
-    background: rgba(255,255,255,0.8);
-    border-radius: 5px;
-    box-shadow: 0 2px 6px -2px rgba(0,0,0,.1), 0 0 1px rgba(0,0,0,.4);
+    overflow: auto;
+    padding: 2rem 2.4rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-purple);
+    border-radius: var(--radius);
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: var(--color-green);
+}
+
+.gh-canvas > pre code {
+    color: inherit;
+    background: none;
+    border: none;
+    padding: 0;
 }
 
 .kg-embed-card {
@@ -172,6 +195,7 @@ figcaption strong {
 
 .kg-image-card img {
     margin: auto;
+    border-radius: var(--radius);
 }
 
 
@@ -206,29 +230,39 @@ figcaption strong {
 .gh-content th {
     padding: 0.5em 0.8em;
     text-align: left;
+    font-family: var(--font-mono);
     font-size: .75em;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--color-green);
+    border-bottom: 1px solid var(--color-border);
 }
 
 .gh-content td {
-    padding: 0.4em 0.7em;
+    padding: 0.5em 0.8em;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
 }
 
 .gh-content tbody tr:nth-child(2n + 1) {
-    background-color: rgba(0,0,0,0.1);
-    padding: 1px;
+    background-color: rgba(255,255,255,0.02);
 }
 
-.gh-content tbody tr:nth-child(2n + 2) td:last-child {
-    box-shadow:
-        inset 1px 0 rgba(0,0,0,0.1),
-        inset -1px 0 rgba(0,0,0,0.1);
-}
-
-.gh-content tbody tr:nth-child(2n + 2) td {
-    box-shadow: inset 1px 0 rgba(0,0,0,0.1);
+.gh-content tbody tr:hover {
+    background-color: rgba(147,51,234,0.05);
 }
 
 .gh-content tbody tr:last-child {
-    border-bottom: 1px solid rgba(0,0,0,.1);
+    border-bottom: 1px solid var(--color-border);
+}
+
+/* Ghost Editor bookmark card */
+.kg-bookmark-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    transition: border-color 0.2s ease;
+}
+
+.kg-bookmark-card:hover {
+    border-color: rgba(147,51,234,0.3);
 }

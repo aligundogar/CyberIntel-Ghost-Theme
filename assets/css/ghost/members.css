@@ -1,4 +1,4 @@
-/* Members Auth Template
+/* Members Auth Template — CyberIntel Dark Theme
 /* ---------------------------------------------------------- */
 
 .gh-auth-form {
@@ -16,7 +16,7 @@
 .gh-auth-form p {
     margin: 10px 0 4vmin 0;
     font-size: 1.7rem;
-    color: rgba(0,0,0,0.6)
+    color: var(--color-text-secondary);
 }
 
 .gh-auth-form p small {
@@ -91,15 +91,16 @@ form[data-members-form].error .message-error {
     line-height: 1.5em;
     font-weight: 500;
     text-align: center;
-    background: var(--color-base);
+    background: var(--color-surface-elevated);
     border-radius: var(--radius);
 }
 form[data-members-form].success .message-success {
-    background: var(--color-success);
+    background: var(--color-green-dim);
+    color: #0a0a0f;
 }
 form[data-members-form].error .message-error {
     color: var(--color-error);
-    background: #fff;
+    background: var(--color-surface);
     box-shadow: var(--color-error) 0 0 0 1px;
 }
 

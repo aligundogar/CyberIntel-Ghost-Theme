@@ -1,0 +1,6 @@
+/* Missing custom fonts Ghost GScan support */
+
+:root {
+    --heading-font: 'JetBrains Mono', 'Fira Code', Menlo, Courier, monospace;
+    --body-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", sans-serif;
+}

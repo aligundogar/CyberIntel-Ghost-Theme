@@ -1,5 +1,5 @@
 {{!--
-Re-usable card for linking to posts
+Re-usable card for linking to posts — CyberIntel Dark Theme
 --}}
 
 <article class="gh-card {{post_class}}">
@@ -48,10 +48,24 @@ Re-usable card for linking to posts
             </picture>
         {{/if}}
         <div class="gh-card-content">
-            <span class="gh-card-meta"><time datetime="{{date format="YYYY-MM-DD"}}">{{date format="D MMM YYYY"}}</time> <span class="bull">&bull;</span> {{reading_time}}</span>
+            <div class="gh-card-meta-row">
+                {{#if primary_tag}}
+                    <span class="gh-card-tag">{{primary_tag.name}}</span>
+                {{/if}}
+                <span class="gh-card-meta">
+                    <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="D MMM YYYY"}}</time>
+                    <span class="bull">&bull;</span>
+                    {{reading_time}}
+                </span>
+            </div>
             <h2 class="gh-card-title">{{title}}</h2>
-            <p>{{excerpt}}</p>
-            <strong>Read more</strong>
+            {{#if excerpt}}
+                <p class="gh-card-excerpt">{{excerpt words="25"}}</p>
+            {{/if}}
+            <span class="gh-card-readmore">
+                {{t "Read more"}}
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </span>
         </div>
     </a>
 </article>

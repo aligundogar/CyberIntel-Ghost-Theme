@@ -1,13 +1,15 @@
-// JavaScript files are compiled and minified during the build process to the assets/built folder. See available scripts in the package.json file.
+// CyberIntel Ghost Theme — JavaScript Entry Point
+// CSS + JS compiled during build to assets/built/
 
 // Import CSS
 import "../css/index.css";
 
-// Import JS
+// Import JS modules
 import menuOpen from "./menuOpen";
 import infiniteScroll from "./infiniteScroll";
+import typewriterEffect from "./typewriter";
 
-
-// Call the menu and infinite scroll functions
+// Initialize
 menuOpen();
 infiniteScroll();
+typewriterEffect();
