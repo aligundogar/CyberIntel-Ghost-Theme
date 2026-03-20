@@ -1,0 +1,66 @@
+{{!< default}}
+
+{{!-- 
+This is a custom template for a "Live Feed / Canlı Akış" page.
+Select this template from the Page Settings menu in Ghost Admin.
+It pulls posts with the 'sondakika' tag and formats them like a continuous intelligence feed.
+--}}
+
+<div class="gh-page">
+    <div class="gh-container">
+
+        {{#post}}
+        <header class="gh-page-head cyber-live-head">
+            <div class="cyber-live-indicator">
+                <span class="cyber-status-dot"></span> LIVE OSINT FEED
+            </div>
+            <h1>{{title}}</h1>
+            {{#if custom_excerpt}}
+                <p class="gh-excerpt">{{custom_excerpt}}</p>
+            {{/if}}
+        </header>
+
+        {{#if content}}
+        <div class="gh-content gh-canvas" style="margin-bottom: 4vmin;">
+            {{content}}
+        </div>
+        {{/if}}
+        {{/post}}
+
+        <div class="cyber-live-timeline">
+            {{!-- Fetch the latest 50 posts with the 'sondakika' tag --}}
+            {{#get "posts" filter="tag:sondakika" limit="50" include="tags"}}
+                {{#foreach posts}}
+                <article class="cyber-live-item">
+                    
+                    <div class="cyber-live-meta">
+                        <time class="cyber-live-time" datetime="{{date format="YYYY-MM-DDTHH:mm"}}">{{date format="HH:mm"}}</time>
+                        <span class="cyber-live-date">{{date format="DD MMM YYYY"}}</span>
+                    </div>
+
+                    <div class="cyber-live-marker">
+                        <span class="cyber-live-pulse"></span>
+                    </div>
+
+                    <div class="cyber-live-content">
+                        {{#if primary_tag}}
+                            <span class="cyber-live-tag">{{primary_tag.name}}</span>
+                        {{/if}}
+                        <h2 class="cyber-live-title"><a href="{{url}}">{{title}}</a></h2>
+                        {{#if excerpt}}
+                            <p class="cyber-live-excerpt">{{excerpt words="25"}}</p>
+                        {{/if}}
+                        <a href="{{url}}" class="cyber-live-link">{{t "Read more"}} <span class="cyber-terminal-cursor">_</span></a>
+                    </div>
+
+                </article>
+                {{else}}
+                    <div class="cyber-error" style="text-align: center; padding: 4vmin;">
+                        <p class="cyber-prompt-warn">[!] {{t "No posts found"}}</p>
+                    </div>
+                {{/foreach}}
+            {{/get}}
+        </div>
+
+    </div>
+</div>
